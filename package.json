@@ -1,7 +1,7 @@
 {
   "name": "member",
   "version": "0.1.0",
-  "homepage": "./member/",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
