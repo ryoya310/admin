@@ -15,8 +15,6 @@ import Index from "./views/index";
 import Article from "./views/article";
 
 export default function App() {
-
-  console.log(Modules.store);
   return (
     <Provider store={Modules.store}>
       <Routes>

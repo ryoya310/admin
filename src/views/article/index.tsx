@@ -9,7 +9,6 @@ import axios from "axios";
 const Article = () => {
 
   const list = Modules.useAppSelector(Modules.state.article.list);
-  console.log(list);
 
   const dispatch = Modules.useAppDispatch();
   useEffect(() => {
