@@ -1,0 +1,29 @@
+@use "sass:map";
+
+// 汎用的CSS
+$maxWidth: 1920px;
+
+// テーブル
+// https://meyerweb.com/eric/tools/color-blend/#008833:FFFFFF:4:hex
+$blend1_01: #85C69D;
+$blend1_02: #A3D4B6;
+$blend1_03: #C2E3CE;
+$blend1_04: #E0F1E7;
+
+// ブレンド2
+// https://meyerweb.com/eric/tools/color-blend/#FDD108:FFFFFF:4:hex
+$blend2_01: #FEE36B;
+$blend2_02: #FEE989;
+$blend2_03: #FEEEA6;
+$blend2_04: #FFF4C4;
+
+// レスポンシブ対応
+$breakpoints: (
+	"sp": "screen and (max-width: 789px)",
+	"pc": "screen and (min-width: 790px)"
+) !default;
+@mixin mq($breakpoint) {
+	@media #{map.get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
