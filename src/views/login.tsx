@@ -13,7 +13,7 @@ import InputPassword from "../components/atoms/input_password";
 const Login = () => {
 
   const location = useLocation();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = Modules.useAppDispatch();
 
   const changed = (name: string, value: string | null) => {
