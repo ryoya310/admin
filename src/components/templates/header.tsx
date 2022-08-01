@@ -1,34 +1,59 @@
 import * as Modules from "../../app/modules";
-import { useState, SyntheticEvent } from "react";
+import { useState, SyntheticEvent, MouseEvent } from "react";
 import { Outlet, Link } from "react-router-dom";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import SvgIcon from "@mui/material/SvgIcon";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const Header = () => {
 
-  const [value, setValue] = useState(0);
-  const handleChange=(e: SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  return <>
-    <header>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable auto tabs"
-        className="HeaderMenu"
-      >
-        <Tab label="Index" component={Link} to="/" />
-        <Tab label="Article" component={Link} to="/article" />
-        <Tab label="Login" component={Link} to="/login" />
-        <Tab label="Logout" component={Link} to="/logout" />
-      </Tabs>
-    </header>
-    <Outlet />
-  </>;
-};
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
+  let auth = Modules.useAppSelector(Modules.state.login.isAuth);
+  if (!auth && Modules.isAuth()) {
+    auth = true;
+  }
+  if (!auth) {
+    return <>
+      <Outlet />
+    </>;
+  }
+
+  return (
+    <Box
+      className="header"
+    >
+      <h1>Member画面</h1>
+      <div
+        className="header-config"
+      >
+        <Button
+          onClick={handleClick}
+        >
+          <SvgIcon component={SettingsIcon} inheritViewBox />
+        </Button>
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose} component={Link}  to={"/logout"}>Logout</MenuItem>
+        </Menu>
+      </div>
+    </Box>
+  );
+}
 export default Header

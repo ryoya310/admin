@@ -13,10 +13,16 @@ const state = {
     article,
 }
 
+const isAuth = () => {
+
+  return localStorage.getItem("login") == "true" ? true : false;
+}
+
 export {
     constant,
     store,
     state,
+    isAuth,
     useAppDispatch,
     useAppSelector,
     RequireAuth,

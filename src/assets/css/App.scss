@@ -1,5 +1,7 @@
 @use "config.scss";
 
+$fontColor: #111;
+
 body {
 	margin: 0;
 	line-height: 1.5;
@@ -11,9 +13,64 @@ body {
 	height: 100vh;
 }
 
-header {
-	margin-bottom: 1em;
+.wrapper {
+
+	background: #fff;
+	height: 100vh;
+	* {
+		box-sizing: border-box;
+		vertical-align: middle;
+	}
+	.header {
+		padding: 0 1em;
+		height: 7vh;
+		line-height: 7vh;
+		background: #eee;
+		display: flex;
+		justify-content: space-between;
+		h1 {
+			margin: 0;
+			font-size: min(2vw, 24px);
+		}
+		&-config {
+			button {
+				min-width: initial;
+				color: $fontColor;
+			}
+		}
+	}
+
+	.side {
+		width: 150px;
+		height: 90vh;
+		&-menu {
+			height: 100%;
+		}
+	}
+
+	.main {
+		display: flex;
+		flex-grow: 1;
+		height: 90vh;
+	}
+
+	.footer {
+		padding: 0 1em;
+		height: 3vh;
+		line-height: 3vh;
+		background: #eee;
+		text-align: right;
+		p {
+			margin: 0;
+		}
+	}
 }
+
+.views-wrapper {
+	width: calc(100% - 150px);
+	padding: 1em;
+}
+
 .LoginForm {
 
 	position: relative;

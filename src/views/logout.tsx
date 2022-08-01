@@ -1,16 +1,17 @@
 import * as Modules from "../app/modules";
 import { useEffect } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 
-export default function LogOut() {
+const Logout = () => {
+
+  const location = useLocation();
 
   const dispatch = Modules.useAppDispatch();
   useEffect(() => {
-    dispatch(Modules.state.login.setAuth({result: false}))
-  });
 
-  return (
-    <div>
-      <p>ログインアウトしました。</p>
-    </div>
-  );
+    dispatch(Modules.state.login.setAuth({result: false}))
+  }, [location]);
+
+  return <Navigate to="/login" state={{ from: location }} />;
 }
+export default Logout

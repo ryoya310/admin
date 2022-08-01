@@ -1,10 +1,10 @@
 import * as Modules from "./app/modules";
 
 import { Provider } from "react-redux";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
-// Header
-import Header from "./components/templates/header";
+// Layout
+import Layout from "./components/templates/layout";
 
 // Public
 import Login from "./views/login";
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <Provider store={Modules.store}>
       <Routes>
-        <Route element={<Header />}>
+        <Route element={<Layout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<Index />} />

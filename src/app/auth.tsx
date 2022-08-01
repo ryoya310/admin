@@ -3,13 +3,12 @@ import { useLocation, Navigate } from "react-router-dom";
 
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
-  let auth = Modules.useAppSelector(Modules.state.login.isLogin);
-  if (localStorage.getItem("login") == "true") {
-    auth = true;
-  }
-
   const location = useLocation();
 
+  let auth = Modules.useAppSelector(Modules.state.login.isAuth);
+  if (!auth && Modules.isAuth()) {
+    auth = true;
+  }
   if (!auth) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }

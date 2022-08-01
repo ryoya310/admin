@@ -1,7 +1,7 @@
 
 import * as Modules from "../app/modules";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import axios from "axios";
 
 import Button from "@mui/material/Button";
@@ -12,12 +12,21 @@ import InputPassword from "../components/atoms/input_password";
 
 const Login = () => {
 
-  const navigate = useNavigate();
+  const location = useLocation();
+  let navigate = useNavigate();
   const dispatch = Modules.useAppDispatch();
 
   const changed = (name: string, value: string | null) => {
     dispatch(Modules.state.login.getFormData({name, value}))
   }
+
+  const submited = (response: any) => {
+    dispatch(Modules.state.login.setAuth(response.data))
+    console.log(response.data)
+    // return <Navigate to="/" replace />;
+    navigate(`/`, { replace: true });
+  }
+
   return (
     <form
         className="LoginForm"
@@ -29,9 +38,8 @@ const Login = () => {
             `${Modules.constant.apiLoginURL}`,
             psdt
           ).then(function (response) {
-            dispatch(Modules.state.login.setAuth(response.data))
             if (response.data.result) {
-              navigate("/");
+              submited(response);
             }
           });
         }}
