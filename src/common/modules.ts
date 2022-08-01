@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import { RequireAuth } from "./auth";
 
 // state
-import * as login from "../state/login";
-import * as article from "../state/article";
+import * as login from "../store/login";
+import * as article from "../store/article";
 
 // グローバル: State
 const state = {

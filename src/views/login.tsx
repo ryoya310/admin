@@ -1,5 +1,5 @@
 
-import * as Modules from "../app/modules";
+import * as Modules from "../common/modules";
 
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import axios from "axios";

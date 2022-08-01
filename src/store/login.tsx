@@ -1,4 +1,4 @@
-import * as Modules from "../app/modules";
+import * as Modules from "../common/modules";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface LoginState {

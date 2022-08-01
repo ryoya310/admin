@@ -1,4 +1,4 @@
-import * as Modules from "../../app/modules";
+import * as Modules from "../../common/modules";
 
 import { useState, useEffect } from "react";
 import axios from "axios";

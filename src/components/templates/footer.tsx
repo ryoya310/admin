@@ -1,4 +1,4 @@
-import * as Modules from "../../app/modules";
+import * as Modules from "../../common/modules";
 import Box from "@mui/material/Box";
 
 const Footer = () => {

@@ -1,4 +1,4 @@
-import * as Modules from "../app/modules";
+import * as Modules from "../common/modules";
 import { useEffect } from "react";
 import { useLocation, Navigate } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import * as Modules from "./app/modules";
+import * as Modules from "./common/modules";
 
 import { Provider } from "react-redux";
 import { Routes, Route, Outlet } from "react-router-dom";
