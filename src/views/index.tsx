@@ -2,8 +2,8 @@ import * as Modules from "../common/modules";
 
 const Index = () => {
 
-  const list = Modules.useAppSelector(Modules.state.login.views);
-  console.log(list)
+  const views = Modules.useAppSelector(Modules.state.login.views);
+  console.log(views)
 
   return (
     <Modules.RequireAuth>

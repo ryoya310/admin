@@ -24,8 +24,8 @@ const Login = () => {
     navigate(`/`, { replace: true });
   }
 
-  const list = Modules.useAppSelector(Modules.state.login.views);
-  console.log(list)
+  const views = Modules.useAppSelector(Modules.state.login.views);
+  console.log(views)
 
   return (
     <form
@@ -36,8 +36,6 @@ const Login = () => {
           const response = await dispatch(Modules.state.login.getLoginInfo(new FormData(e.currentTarget)))
           if (response.payload.result) {
             submited(response);
-          } else {
-            console.log(list)
           }
         }}
       >
