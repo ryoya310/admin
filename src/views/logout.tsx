@@ -8,8 +8,7 @@ const Logout = () => {
 
   const dispatch = Modules.useAppDispatch();
   useEffect(() => {
-
-    dispatch(Modules.state.login.setAuth({result: false}))
+    dispatch(Modules.state.member.setAuth({result: false}))
   }, [location]);
 
   return <Navigate to="/login" state={{ from: location }} />;

@@ -1,40 +1,37 @@
 import * as Modules from "../common/modules";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login } from "../api/login";
+import { login } from "../api/member";
 
-export interface LoginState {
+export interface Member {
   views: any;
   isAuth: boolean;
   status: "idle" | "loading" | "failed";
 }
 
-const initialState: LoginState = {
+const initialState: Member = {
   views: {},
   isAuth: false,
   status: "idle",
 };
 
 export const getLoginInfo = createAsyncThunk(
-  "login",
+  "member",
   async (datas: any) => {
     const response = await login(datas);
     return response.data;
   }
 );
 
-export const loginSlice = createSlice({
-  name: "login",
+export const memberSlice = createSlice({
+  name: "member",
   initialState,
   reducers: {
     getFormData: (state, arr) => {
       state.views = arr.payload;
     },
     setAuth: (state, arr) => {
-      localStorage.setItem("login", arr.payload.result);
+      localStorage.setItem("member", arr.payload.result);
       state.isAuth = arr.payload.result;
-    },
-    getViews: (state) => {
-      console.log(state)
     }
   },
   extraReducers: (builder) => {
@@ -52,7 +49,7 @@ export const loginSlice = createSlice({
   },
 });
 
-export const { getFormData, setAuth, getViews } = loginSlice.actions;
-export const views = (state: Modules.rootState) => state.login.views;
-export const isAuth = (state: Modules.rootState) => state.login.isAuth;
-export default loginSlice.reducer;
+export const { getFormData, setAuth } = memberSlice.actions;
+export const views = (state: Modules.rootState) => state.member.views;
+export const isAuth = (state: Modules.rootState) => state.member.isAuth;
+export default memberSlice.reducer;

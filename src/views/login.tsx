@@ -15,17 +15,14 @@ const Login = () => {
   const dispatch = Modules.useAppDispatch();
 
   const changed = (name: string, value: string | null) => {
-    dispatch(Modules.state.login.getFormData({name, value}))
+    dispatch(Modules.state.member.getFormData({name, value}))
   }
 
   const submited = (response: any) => {
 
-    dispatch(Modules.state.login.setAuth(response.payload))
+    dispatch(Modules.state.member.setAuth(response.payload))
     navigate(`/`, { replace: true });
   }
-
-  const views = Modules.useAppSelector(Modules.state.login.views);
-  console.log(views)
 
   return (
     <form
@@ -33,7 +30,7 @@ const Login = () => {
         onSubmit={ async (e) => {
 
           e.preventDefault();
-          const response = await dispatch(Modules.state.login.getLoginInfo(new FormData(e.currentTarget)))
+          const response = await dispatch(Modules.state.member.getLoginInfo(new FormData(e.currentTarget)))
           if (response.payload.result) {
             submited(response);
           }

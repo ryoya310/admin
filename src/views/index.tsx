@@ -2,8 +2,9 @@ import * as Modules from "../common/modules";
 
 const Index = () => {
 
-  const views = Modules.useAppSelector(Modules.state.login.views);
+  const views = Modules.useAppSelector(Modules.state.member.views);
   console.log(views)
+  console.log(views.request)
 
   return (
     <Modules.RequireAuth>
@@ -11,6 +12,15 @@ const Index = () => {
         className="Index views-wrapper"
       >
         <h2>Index</h2>
+        <div>
+          LoginID: {views.request.LoginID}
+        </div>
+        <div>
+          Message: {views.message}
+        </div>
+        <div>
+          名前: {views.view.MemberName}
+        </div>
       </div>
     </Modules.RequireAuth>
   );

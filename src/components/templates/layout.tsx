@@ -1,5 +1,5 @@
 import * as Modules from "../../common/modules";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
 
 // Header
@@ -12,7 +12,7 @@ import Side from "./side";
 
 const Layout = () => {
 
-  let auth = Modules.useAppSelector(Modules.state.login.isAuth);
+  let auth = Modules.useAppSelector(Modules.state.member.isAuth);
   if (!auth && Modules.isAuth()) {
     auth = true;
   }
@@ -23,18 +23,20 @@ const Layout = () => {
   }
 
   return (
-    <Box
-      className="wrapper"
-    >
-      <Header />
+    <Modules.RequireAuth>
       <Box
-        className="main"
+        className="wrapper"
       >
-        <Side />
-        <Outlet />
+        <Header />
+        <Box
+          className="main"
+        >
+          <Side />
+          <Outlet />
+        </Box>
+        <Footer />
       </Box>
-      <Footer />
-    </Box>
+    </Modules.RequireAuth>
   );
 }
 export default Layout

@@ -4,12 +4,12 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import { RequireAuth } from "./auth";
 
 // state
-import * as login from "../store/login";
+import * as member from "../store/member";
 import * as article from "../store/article";
 
 // グローバル: State
 const state = {
-    login,
+    member,
     article,
 }
 

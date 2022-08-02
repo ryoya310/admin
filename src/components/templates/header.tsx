@@ -20,7 +20,7 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  let auth = Modules.useAppSelector(Modules.state.login.isAuth);
+  let auth = Modules.useAppSelector(Modules.state.member.isAuth);
   if (!auth && Modules.isAuth()) {
     auth = true;
   }

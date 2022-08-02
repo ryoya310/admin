@@ -6,7 +6,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
   const location = useLocation();
 
-  let auth = Modules.useAppSelector(Modules.state.login.isAuth);
+  let auth = Modules.useAppSelector(Modules.state.member.isAuth);
   if (!auth && Modules.isAuth()) {
     auth = true;
   }
