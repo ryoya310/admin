@@ -20,16 +20,6 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  let auth = Modules.useAppSelector(Modules.state.member.isAuth);
-  if (!auth && Modules.isAuth()) {
-    auth = true;
-  }
-  if (!auth) {
-    return <>
-      <Outlet />
-    </>;
-  }
-
   return (
     <Box
       className="header"

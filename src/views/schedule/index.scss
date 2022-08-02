@@ -1,0 +1,29 @@
+.Schedule {
+  h2 {
+    color: blue;
+  }
+  .weekly {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding-left: 0;
+    max-width: 600px;
+    li {
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      &:hover {
+        background: #eee;
+      }
+      &.on {
+        color: green;
+      }
+      &.Sunday {
+        color: red;
+      }
+      &.Saturday {
+        color: blue;
+      }
+    }
+  }
+}

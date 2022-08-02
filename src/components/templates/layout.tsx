@@ -12,31 +12,29 @@ import Side from "./side";
 
 const Layout = () => {
 
-  let auth = Modules.useAppSelector(Modules.state.member.isAuth);
-  if (!auth && Modules.isAuth()) {
-    auth = true;
-  }
-  if (!auth) {
-    return <>
-      <Outlet />
-    </>;
-  }
+  // let auth = Modules.useAppSelector(Modules.state.member.isAuth);
+  // if (!auth && Modules.isAuth()) {
+  //   auth = true;
+  // }
+  // if (!auth) {
+  //   return <>
+  //     <Outlet />
+  //   </>;
+  // }
 
   return (
-    <Modules.RequireAuth>
+    <Box
+      className="wrapper"
+    >
+      <Header />
       <Box
-        className="wrapper"
+        className="main"
       >
-        <Header />
-        <Box
-          className="main"
-        >
-          <Side />
-          <Outlet />
-        </Box>
-        <Footer />
+        <Side />
+        <Outlet />
       </Box>
-    </Modules.RequireAuth>
+      <Footer />
+    </Box>
   );
 }
 export default Layout

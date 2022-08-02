@@ -6,11 +6,13 @@ import { RequireAuth } from "./auth";
 // state
 import * as member from "../store/member";
 import * as article from "../store/article";
+import * as schedule from "../store/schedule";
 
 // グローバル: State
 const state = {
     member,
     article,
+    schedule,
 }
 
 // localStorageにloginがあれば簡易認証

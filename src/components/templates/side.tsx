@@ -8,6 +8,7 @@ import Tab from "@mui/material/Tab";
 const pages = [
   { key: 1, label: "ダッシュボード", link: "/" },
   { key: 2, label: "記事管理", link: "/article" },
+  { key: 3, label: "スケジュール", link: "/schedule" },
 ]
 
 const Side = () => {

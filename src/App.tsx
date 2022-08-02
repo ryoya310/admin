@@ -13,6 +13,7 @@ import Logout from "./views/logout";
 // Private
 import Index from "./views/index";
 import Article from "./views/article";
+import Schedule from "./views/schedule";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<Index />} />
           <Route path="/article" element={<Article />} />
+          <Route path="/schedule" element={<Schedule />} />
         </Route>
       </Routes>
     </Provider>
