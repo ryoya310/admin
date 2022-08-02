@@ -1,6 +1,7 @@
 import * as Modules from "./modules";
 import { useLocation, Navigate } from "react-router-dom";
 
+// 権限が必要なページ
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
   const location = useLocation();

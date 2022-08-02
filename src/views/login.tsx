@@ -1,8 +1,7 @@
 
 import * as Modules from "../common/modules";
 
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import LoginIcon from '@mui/icons-material/Login';
@@ -12,7 +11,6 @@ import InputPassword from "../components/atoms/input_password";
 
 const Login = () => {
 
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = Modules.useAppDispatch();
 
@@ -21,27 +19,26 @@ const Login = () => {
   }
 
   const submited = (response: any) => {
-    dispatch(Modules.state.login.setAuth(response.data))
-    console.log(response.data)
-    // return <Navigate to="/" replace />;
+
+    dispatch(Modules.state.login.setAuth(response.payload))
     navigate(`/`, { replace: true });
   }
+
+  const list = Modules.useAppSelector(Modules.state.login.views);
+  console.log(list)
 
   return (
     <form
         className="LoginForm"
-        onSubmit={(e) => {
+        onSubmit={ async (e) => {
 
           e.preventDefault();
-          var psdt = new FormData(e.currentTarget);
-          axios.post(
-            `${Modules.constant.apiLoginURL}`,
-            psdt
-          ).then(function (response) {
-            if (response.data.result) {
-              submited(response);
-            }
-          });
+          const response = await dispatch(Modules.state.login.getLoginInfo(new FormData(e.currentTarget)))
+          if (response.payload.result) {
+            submited(response);
+          } else {
+            console.log(list)
+          }
         }}
       >
         <div

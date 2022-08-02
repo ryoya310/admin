@@ -13,8 +13,8 @@ const state = {
     article,
 }
 
+// localStorageにloginがあれば簡易認証
 const isAuth = () => {
-
   return localStorage.getItem("login") == "true" ? true : false;
 }
 

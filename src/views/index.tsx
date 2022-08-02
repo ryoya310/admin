@@ -1,6 +1,10 @@
 import * as Modules from "../common/modules";
 
 const Index = () => {
+
+  const list = Modules.useAppSelector(Modules.state.login.views);
+  console.log(list)
+
   return (
     <Modules.RequireAuth>
       <div
