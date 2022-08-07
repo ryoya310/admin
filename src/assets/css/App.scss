@@ -1,6 +1,11 @@
 @use "config.scss";
+@import "Hamburger";
 
 $fontColor: #111;
+$headerHeight: 5vh;
+$mainHeight: 90vh;
+$footerHeight: 5vh;
+$sideSize: 40px;
 
 body {
 	margin: 0;
@@ -13,6 +18,10 @@ body {
 	height: 100vh;
 }
 
+svg {
+	fill: #888;
+}
+
 .wrapper {
 
 	background: #fff;
@@ -22,42 +31,85 @@ body {
 		vertical-align: middle;
 	}
 	.header {
-		padding: 0 1em;
-		height: 7vh;
-		line-height: 7vh;
-		background: #eee;
+		padding: 0 0.2em 0 1em;
+		height: $headerHeight;
+		line-height: $headerHeight;
+		background: config.$blend1_01;
+		color: #fff;
 		display: flex;
 		justify-content: space-between;
-		h1 {
-			margin: 0;
-			font-size: min(2vw, 24px);
+		&-left {
+			display: flex;
+			align-items: center;
+			h1 {
+				margin: 0;
+				font-size: min(2vw, 24px);
+			}
 		}
-		&-config {
+
+		&-right {
 			button {
 				min-width: initial;
-				color: $fontColor;
+				color: #fff;
 			}
 		}
 	}
 
+	.main {
+		position: relative;
+		display: flex;
+		flex-grow: 1;
+		height: $mainHeight;
+		width: 100%;
+	}
+
 	.side {
-		width: 150px;
-		height: 90vh;
-		&-menu {
-			height: 100%;
+
+		height: calc($mainHeight + $footerHeight);
+		background: #eee;
+
+		.MuiDrawer-paper {
+			top: $headerHeight;
+			background: transparent;
+		}
+		.toggleBtn {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: $sideSize;
+			height: $sideSize;
+		}
+		.toggleMenu {
+			position: absolute;
+			top: $sideSize;
+			width: 100%;
+			ul {
+				padding: 0;
+				li {
+					padding: 0;
+					width: $sideSize;
+				}
+			}
+			.-icon {
+				display: contents;
+				width: $sideSize;
+			}
+			.-label {
+				padding-left: 0;
+				align-items: flex-start;
+				color: #888;
+			}
+		}
+		svg {
+			width: $sideSize;
+			fill: #888;
 		}
 	}
 
-	.main {
-		display: flex;
-		flex-grow: 1;
-		height: 90vh;
-	}
-
 	.footer {
-		padding: 0 1em;
-		height: 3vh;
-		line-height: 3vh;
+		padding: 0 1em 0 $sideSize;
+		height: $footerHeight;
+		line-height: $footerHeight;
 		background: #eee;
 		text-align: right;
 		p {
@@ -67,7 +119,7 @@ body {
 }
 
 .views-wrapper {
-	width: calc(100% - 150px);
+	width: 100%;
 	padding: 1em;
 	overflow-y: scroll;
 }
@@ -106,6 +158,53 @@ body {
 		button {
 			height: 60px;
 		}
+	}
+}
+
+.upPositionDialog {
+
+	top: initial!important;
+	bottom: 0!important;
+	div[aria-labelledby="upPositionDialog"] {
+
+		bottom: 0!important;
+		max-width: 90%;
+		height: 96vh;
+		max-height: 100%;
+		margin: 0;
+	}
+}
+
+.leftPositionDialog {
+
+	> div {
+		display: block;
+	}
+	left: 0!important;
+	div[aria-labelledby="leftPositionDialog"] {
+
+		left: 0!important;
+		bottom: 0!important;
+		max-width: 90%;
+		height: 100vh;
+		max-height: 100%;
+		margin: 0;
+	}
+}
+
+.rightPositionDialog {
+
+	> div {
+		display: block;
+	}
+	right: 0!important;
+	div[aria-labelledby="rightPositionDialog"] {
+
+		bottom: 0!important;
+		max-width: 100%;
+		height: 100vh;
+		max-height: 100%;
+		margin: 0;
 	}
 }
 

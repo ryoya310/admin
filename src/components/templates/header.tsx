@@ -1,12 +1,16 @@
 import * as Modules from "../../common/modules";
-import { useState, SyntheticEvent, MouseEvent } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { useState, MouseEvent } from "react";
+import { Link } from "react-router-dom";
+import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import SvgIcon from "@mui/material/SvgIcon";
+
+
 import SettingsIcon from "@mui/icons-material/Settings";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const Header = () => {
 
@@ -24,10 +28,13 @@ const Header = () => {
     <Box
       className="header"
     >
-      <h1>Member画面</h1>
+      <div className="header-left">
+        <h1>Member画面</h1>
+      </div>
       <div
-        className="header-config"
+        className="header-right"
       >
+        <SvgIcon component={NotificationsIcon} inheritViewBox />
         <Button
           onClick={handleClick}
         >

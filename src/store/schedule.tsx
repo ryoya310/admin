@@ -1,10 +1,10 @@
 import * as Modules from "../common/modules";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, configureStore } from "@reduxjs/toolkit";
 import { schedule_datelist } from "../api/schedule";
 
 export interface Schedule {
-  views: object;
-  dates: object;
+  views: any;
+  dates: any;
   status: "idle" | "loading" | "failed";
 }
 
@@ -16,7 +16,7 @@ const initialState: Schedule = {
 
 export const testList = createAsyncThunk(
   "schedule",
-  async (datas: any) => {
+  async (datas: string | null) => {
     const response = await schedule_datelist(datas);
     return response.data;
   }
@@ -26,8 +26,6 @@ export const scheduleSlice = createSlice({
   name: "schedule",
   initialState,
   reducers: {
-    init: (state) => {
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -44,7 +42,5 @@ export const scheduleSlice = createSlice({
   },
 });
 
-export const { init } = scheduleSlice.actions;
 export const views = (state: Modules.rootState) => state.schedule.views;
-export const dates = (state: Modules.rootState) => state.schedule.dates;
 export default scheduleSlice.reducer;

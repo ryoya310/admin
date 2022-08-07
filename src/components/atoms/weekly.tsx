@@ -1,58 +1,56 @@
-import { useState } from "react";
+import * as Modules from "../../common/modules";
+import { useState, useEffect } from "react";
 
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import { Swiper, SwiperSlide } from "swiper/react";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Week from "./week";
+
+import "swiper/css";
 
 type Props = {
-  className: string
-  posts: any
+  dates: any
+  setDates(data: any): void
 }
+const Weekly = ({ dates, setDates }: Props) => {
 
-const Weekly = ({ className, posts }: Props) => {
+  const [caption, setCaption] = useState("");
 
-  console.log(posts)
-  const dts = posts.dates;
-  console.log(dts)
-
-  if (dts === undefined) {
-    return <></>;
+  if (dates.current === undefined) {
+    return <><CircularProgress /></>;
   }
-  console.log(document.getElementById("detail"))
 
-  const handleOnClick = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e.currentTarget.getAttribute("value"))
+  const handleOnChange = async (e: any) => {
 
-    const detail: any = document.getElementById("detail");
-    if (detail !== null) {
-      detail.innerHTML = e.currentTarget.getAttribute("value");
+    if (e.realIndex == 0) {
+      setCaption(dates.prev.yearmonth)
+    } else if (e.realIndex == 2) {
+      setCaption(dates.next.yearmonth)
+    } else {
+      setCaption(dates.current.yearmonth)
     }
   };
 
   return <>
     <Box>
-      <ul
-        className={className}
+      <h3>{caption}</h3>
+      <Swiper
+        className="weekly"
+        spaceBetween={0}
+        slidesPerView={1}
+        initialSlide={1}
+        onSlideChange={(e) => handleOnChange(e) }
       >
-        {dts.map((date: any) => (
-          <li
-            onClick={(e) => handleOnClick(e)}
-            key={date.no}
-            value={date.date}
-            className={date.cls + " " + date.current}
-          >
-            <div>
-              {date.date_md}
-            </div>
-            <div>
-              {date.week}
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div id="detail">
-        {posts.def_date}
-      </div>
+        <SwiperSlide className="prev">
+          <Week week={dates.prev} />
+        </SwiperSlide>
+        <SwiperSlide className="current">
+          <Week week={dates.current} />
+        </SwiperSlide>
+        <SwiperSlide className="next">
+          <Week week={dates.next} />
+        </SwiperSlide>
+      </Swiper>
     </Box>
   </>;
 };

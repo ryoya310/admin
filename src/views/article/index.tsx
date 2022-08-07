@@ -16,6 +16,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
+import Actions from "../../components/atoms/actions";
+
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -146,13 +148,14 @@ const Article = () => {
           <DataGrid
             rows={datas}
             columns={columns}
-            pageSize={20}
-            rowsPerPageOptions={[100]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
             checkboxSelection
             disableSelectionOnClick
             onCellEditCommit={changeCell}
           />
         </Box>
+        <Actions />
       </div>
     </Modules.RequireAuth>
   );
