@@ -25,17 +25,16 @@ const Schedule = () => {
       >
         <h2>Schedule</h2>
         <Weekly dates={dates} setDates={setDates} />
-        <Dialog caption="ダイアログ下から" viewType="up" contents={<Weekly dates={dates} setDates={setDates} />} />
-        <Dialog caption="ダイアログ左から" viewType="left" contents={<Weekly dates={dates} setDates={setDates} />} />
-        <Dialog caption="ダイアログ右から" viewType="right" contents={<Weekly dates={dates} setDates={setDates} />} />
-        <Dialog caption="ダイアログ" contents={<Weekly dates={dates} setDates={setDates} />} />
+        <Dialog viewType="up" openButton={<>下から</>} contents={<Weekly dates={dates} setDates={setDates} />} />
+        <Dialog viewType="left" openButton={<>左から</>} contents={<Weekly dates={dates} setDates={setDates} />} />
+        <Dialog viewType="right" openButton={<>右から</>} contents={<Weekly dates={dates} setDates={setDates} />} />
+        <Dialog openButton={<>真ん中</>} contents={<Weekly dates={dates} setDates={setDates} />} />
         <Dialog
-          caption="ダイアログOnダイアログ"
           viewType="left"
+          openButton={<>左からの</>}
           contents={
             <Dialog
-              caption="ダイアログ"
-              viewType="up"
+              openButton={<>真ん中</>}
               contents={<Weekly dates={dates} setDates={setDates} />}
             />
           }

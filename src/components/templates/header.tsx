@@ -1,16 +1,18 @@
 import * as Modules from "../../common/modules";
 import { useState, MouseEvent } from "react";
 import { Link } from "react-router-dom";
-import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import SvgIcon from "@mui/material/SvgIcon";
 
-
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+
+import Dialog from "../../components/atoms/dialog";
+
+const logo = require("../../assets/images/logo.svg") as any;
 
 const Header = () => {
 
@@ -33,16 +35,18 @@ const Header = () => {
       className="header"
     >
       <div className="header-left">
+        <img src={logo.default} />
         <h1>Member画面</h1>
       </div>
       <div
         className="header-right"
       >
-        <Button
-          onClick={newsClick}
-        >
-          <SvgIcon component={NotificationsIcon} inheritViewBox />
-        </Button>
+        <Dialog
+          viewType="right"
+          className="contactDialog"
+          openButton={<SvgIcon component={NotificationsIcon} inheritViewBox />}
+          contents={<>aaaa</>}
+        />
         <Button
           onClick={configClick}
         >

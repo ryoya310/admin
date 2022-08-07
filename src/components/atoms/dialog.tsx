@@ -7,8 +7,9 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 
 type Props = {
-  caption: string,
   viewType?: any,
+  className?: any,
+  openButton: JSX.Element
   contents: JSX.Element
 }
 
@@ -49,7 +50,7 @@ const Transition = (viewType: string | null) => {
   }
 }
 
-const OpenDialog = ({ caption, viewType, contents }: Props) => {
+const OpenDialog = ({ viewType, className, openButton, contents }: Props) => {
 
   const [open, setOpen] = React.useState(false);
 
@@ -65,9 +66,9 @@ const OpenDialog = ({ caption, viewType, contents }: Props) => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>{caption}</Button>
+      <Button onClick={handleClickOpen}>{openButton}</Button>
       <Dialog
-        className={posClass}
+        className={posClass + " " + className}
         aria-labelledby={posClass}
         open={open}
         onClose={handleClose}
