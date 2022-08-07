@@ -85,8 +85,8 @@ export default function MiniDrawer() {
           <List>
             {pages.map((page, i) => (
               <ListItem key={i}>
-                <Tab className="-icon" key={i} label={page.icon} component={Link} to={page.link} />
-                <Tab className="-label" key={i} label={page.label} component={Link} to={page.link} sx={{ opacity: open ? 1 : 0 }} />
+                <Tab className="-icon" key={`icon${i}`} label={page.icon} component={Link} to={page.link} />
+                <Tab className="-label" key={`label${i}`} label={page.label} component={Link} to={page.link} sx={{ opacity: open ? 1 : 0 }} />
               </ListItem>
             ))}
           </List>

@@ -16,13 +16,17 @@ const Header = () => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
+  const configClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleClose = () => {
+  const configClose = () => {
     setAnchorEl(null);
   };
+
+  const newsClick = (event: MouseEvent<HTMLElement>) => {
+    console.log(123)
+  };
+
 
   return (
     <Box
@@ -34,9 +38,13 @@ const Header = () => {
       <div
         className="header-right"
       >
-        <SvgIcon component={NotificationsIcon} inheritViewBox />
         <Button
-          onClick={handleClick}
+          onClick={newsClick}
+        >
+          <SvgIcon component={NotificationsIcon} inheritViewBox />
+        </Button>
+        <Button
+          onClick={configClick}
         >
           <SvgIcon component={SettingsIcon} inheritViewBox />
         </Button>
@@ -45,9 +53,9 @@ const Header = () => {
           aria-labelledby="demo-positioned-button"
           anchorEl={anchorEl}
           open={open}
-          onClose={handleClose}
+          onClose={configClose}
         >
-          <MenuItem onClick={handleClose} component={Link}  to={"/logout"}>Logout</MenuItem>
+          <MenuItem onClick={configClose} component={Link}  to={"/logout"}>Logout</MenuItem>
         </Menu>
       </div>
     </Box>

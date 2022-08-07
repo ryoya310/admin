@@ -2,9 +2,9 @@
 @import "Hamburger";
 
 $fontColor: #111;
-$headerHeight: 5vh;
-$mainHeight: 90vh;
-$footerHeight: 5vh;
+$headerHeight: 40px;
+$mainHeight: calc(100vh - 40px - 32px);
+$footerHeight: 32px;
 $sideSize: 40px;
 
 body {
@@ -31,6 +31,10 @@ svg {
 		vertical-align: middle;
 	}
 	.header {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		white-space: nowrap;
 		padding: 0 0.2em 0 1em;
 		height: $headerHeight;
 		line-height: $headerHeight;
