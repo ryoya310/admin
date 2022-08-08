@@ -87,7 +87,7 @@ const Article = () => {
   useEffect(() => {
 
     axios.post(
-      `${Modules.constant.apiRootURL}app/list.json`
+      `${Modules.constant.apiRoot}app/list.json`
     ).then(function (response) {
       dispatch(Modules.state.article.getListData(response.data))
 

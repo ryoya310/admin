@@ -10,7 +10,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
   if (!auth && Modules.isAuth()) {
     auth = true;
   }
-  auth = true;
+  console.log(auth)
 
   if (!auth) {
     return <Navigate to="/login" state={{ from: location }} replace />;

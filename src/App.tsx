@@ -16,17 +16,20 @@ import Article from "./views/article";
 import Schedule from "./views/schedule";
 
 export default function App() {
+
   return (
-    <Provider store={Modules.store}>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/" element={<Index />} />
-          <Route path="/article" element={<Article />} />
-          <Route path="/schedule" element={<Schedule />} />
-        </Route>
-      </Routes>
-    </Provider>
+    <Modules.ConstantsProvider>
+      <Provider store={Modules.store}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/" element={<Index />} />
+            <Route path="/article" element={<Article />} />
+            <Route path="/schedule" element={<Schedule />} />
+          </Route>
+        </Routes>
+      </Provider>
+    </Modules.ConstantsProvider>
   );
 }

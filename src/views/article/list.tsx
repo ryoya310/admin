@@ -9,7 +9,7 @@ const List = () => {
 
   useEffect(() => {
     axios.post(
-      `${Modules.constant.apiArticleURL}`
+      `${Modules.constant.apiRoot}app/list.json`
     ).then(function (response) {
 			setDatas(response.data);
     });

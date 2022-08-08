@@ -1,5 +1,5 @@
 import * as Modules from "../../common/modules";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -17,6 +17,8 @@ const logo = require("../../assets/images/logo.svg") as any;
 
 const Header = () => {
 
+  const constants: any = useContext(Modules.Constants);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const configClick = (event: MouseEvent<HTMLElement>) => {
@@ -26,17 +28,15 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const newsClick = (event: MouseEvent<HTMLElement>) => {
-    console.log(123)
-  };
-
   return (
     <Box
       className="header"
     >
       <div className="header-left">
         <img src={logo.default} />
-        <h1>Member画面</h1>
+        <h1>
+          <Link to="/">{constants.info.SITE_NAME}</Link>
+        </h1>
       </div>
       <div
         className="header-right"
@@ -47,69 +47,7 @@ const Header = () => {
           className="contactDialog"
           readonly
           openButton={<SvgIcon component={NotificationsIcon} inheritViewBox />}
-          contents={<>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          <p>aaa</p>
-          </>
-          }
+          contents={<>list</>}
         />
         <Tooltip title="設定" arrow>
           <Button
@@ -125,7 +63,7 @@ const Header = () => {
           open={open}
           onClose={configClose}
         >
-          <MenuItem onClick={configClose} component={Link}  to={"/logout"}>Logout</MenuItem>
+          <MenuItem onClick={configClose} component={Link} to={"/logout"}>Logout</MenuItem>
         </Menu>
       </div>
     </Box>

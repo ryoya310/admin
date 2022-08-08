@@ -3,6 +3,6 @@ import axios from "axios";
 
 const schedule_datelist = async (dt: string | null) => {
 
-  return axios.post(`${Modules.constant.apiScheduleDateURL}`, dt);
+  return axios.post(`${Modules.constant.apiRoot}app/datelist.php`, dt);
 }
 export { schedule_datelist }

@@ -12,15 +12,16 @@ import Side from "./side";
 
 const Layout = () => {
 
-  // let auth = Modules.useAppSelector(Modules.state.member.isAuth);
-  // if (!auth && Modules.isAuth()) {
-  //   auth = true;
-  // }
-  // if (!auth) {
-  //   return <>
-  //     <Outlet />
-  //   </>;
-  // }
+  let auth = Modules.useAppSelector(Modules.state.member.isAuth);
+  if (!auth && Modules.isAuth()) {
+    auth = true;
+  }
+
+  if (!auth) {
+    return <>
+      <Outlet />
+    </>;
+  }
 
   return (
     <Box

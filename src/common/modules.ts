@@ -1,4 +1,4 @@
-import { constant } from "./constant";
+import { constant, Constants, ConstantsProvider } from "./constant";
 import { store, AppDispatch, RootState } from "./store";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { RequireAuth } from "./auth";
@@ -10,24 +10,27 @@ import * as schedule from "../store/schedule";
 
 // グローバル: State
 const state = {
-    member,
-    article,
-    schedule,
+  member,
+  article,
+  schedule,
 }
 
-// localStorageにloginがあれば簡易認証
+// localStorageにmemberがあれば簡易認証
 const isAuth = () => {
-  return localStorage.getItem("login") == "true" ? true : false;
+  console.log(localStorage.getItem("member"))
+  return localStorage.getItem("member") == "true" ? true : false;
 }
 
 export {
-    constant,
-    store,
-    state,
-    isAuth,
-    useAppDispatch,
-    useAppSelector,
-    RequireAuth,
+  constant,
+  Constants,
+  ConstantsProvider,
+  store,
+  state,
+  isAuth,
+  useAppDispatch,
+  useAppSelector,
+  RequireAuth,
 }
 
 export type appDispatch = AppDispatch;

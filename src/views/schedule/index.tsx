@@ -1,6 +1,6 @@
 import * as Modules from "../../common/modules";
 import "./index.min.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import Weekly from "../../components/atoms/weekly";
@@ -12,7 +12,7 @@ const Schedule = () => {
   const [dates, setDates] = useState({});
 
   useEffect(() => {
-    axios.get(`${Modules.constant.apiScheduleDateURL}`)
+    axios.get(`${Modules.constant.apiRoot}app/datelist.php`)
       .then(res => {
           setDates(res.data)
       })
