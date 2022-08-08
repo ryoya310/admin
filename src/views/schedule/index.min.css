@@ -1,2 +1,2 @@
-.Schedule h2{color:blue}.Schedule .weekly{display:flex;justify-content:space-between;list-style:none;padding-left:0;max-width:600px}.Schedule .weekly .slideBox{display:flex;justify-content:space-between}.Schedule .weekly .week{text-align:center;width:100%;cursor:pointer}.Schedule .weekly .week:hover{background:#eee}.Schedule .weekly .week.on{color:green}.Schedule .weekly .week.Sunday{color:red}.Schedule .weekly .week.Saturday{color:blue}
+.Schedule h2{color:blue}
 /*# sourceMappingURL=index.min.css.map */

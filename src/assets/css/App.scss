@@ -19,6 +19,46 @@ svg {
 	fill: #888;
 }
 
+.weekly {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	padding-left: 0;
+	max-width: 600px;
+	.slideBox {
+		display: flex;
+		justify-content: space-between;
+	}
+	.week {
+		text-align: center;
+		width: 100%;
+		cursor: pointer;
+		&:hover {
+			background: #eee;
+		}
+		&.on {
+			color: green;
+		}
+		&.Sunday {
+			color: red;
+		}
+		&.Saturday {
+			color: blue;
+		}
+	}
+}
+
+// お問い合わせダイアログ
+.contactDialog {
+	top: 40px!important;
+	left: initial!important;
+	right: 0!important;
+	width: 300px;
+	div[aria-labelledby="rightPositionDialog"] {
+		min-width: 30%;
+	}
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%

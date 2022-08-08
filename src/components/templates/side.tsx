@@ -6,6 +6,8 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
 import Tab from "@mui/material/Tab";
 import { Link } from "react-router-dom";
 
@@ -84,10 +86,12 @@ export default function MiniDrawer() {
           <Divider />
           <List>
             {pages.map((page, i) => (
-              <ListItem key={i}>
-                <Tab className="-icon" key={`icon${i}`} label={page.icon} component={Link} to={page.link} />
-                <Tab className="-label" key={`label${i}`} label={page.label} component={Link} to={page.link} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItem>
+              <Tooltip key={i} title={page.label} placement="right" arrow  disableHoverListener={(open === false) ? false : true}>
+                <ListItem key={i}>
+                  <Tab className="-icon" key={`icon${i}`} label={page.icon} component={Link} to={page.link} />
+                  <Tab className="-label" key={`label${i}`} label={page.label} component={Link} to={page.link} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItem>
+              </Tooltip>
             ))}
           </List>
         </Box>

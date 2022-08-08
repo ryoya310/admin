@@ -2,32 +2,4 @@
   h2 {
     color: blue;
   }
-  .weekly {
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    padding-left: 0;
-    max-width: 600px;
-    .slideBox {
-      display: flex;
-      justify-content: space-between;
-    }
-    .week {
-      text-align: center;
-      width: 100%;
-      cursor: pointer;
-      &:hover {
-        background: #eee;
-      }
-      &.on {
-        color: green;
-      }
-      &.Sunday {
-        color: red;
-      }
-      &.Saturday {
-        color: blue;
-      }
-    }
-  }
 }

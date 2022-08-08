@@ -4,11 +4,16 @@ import Dialog from "@mui/material/Dialog";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import Tooltip from "@mui/material/Tooltip";
+
 import { TransitionProps } from "@mui/material/transitions";
+import { read } from "fs";
 
 type Props = {
+  label?: any,
   viewType?: any,
   className?: any,
+  readonly?: boolean,
   openButton: JSX.Element
   contents: JSX.Element
 }
@@ -50,7 +55,7 @@ const Transition = (viewType: string | null) => {
   }
 }
 
-const OpenDialog = ({ viewType, className, openButton, contents }: Props) => {
+const OpenDialog = ({ label, viewType, className, readonly, openButton, contents }: Props) => {
 
   const [open, setOpen] = React.useState(false);
 
@@ -64,33 +69,54 @@ const OpenDialog = ({ viewType, className, openButton, contents }: Props) => {
 
   const posClass = viewType + "PositionDialog";
 
+  const OpenButton = () => {
+    if (label !== undefined) {
+      return <>
+        <Tooltip title={(label !== undefined) ? label : "dialog"}  arrow>
+          <Button onClick={handleClickOpen}>{openButton}</Button>
+        </Tooltip>
+      </>;
+    } else {
+      return <><Button onClick={handleClickOpen}>{openButton}</Button></>;
+    }
+  }
+
+  const Actions = () => {
+
+    if (readonly === true) {
+      return <></>;
+    } else {
+      return <>
+        <div className="dialogContainer-actions">
+          <Button autoFocus onClick={handleClose}>
+            保存
+          </Button>
+          <Button autoFocus onClick={handleClose}>
+            閉じる
+          </Button>
+        </div>
+      </>;
+    }
+  }
+
   return (
     <div>
-      <Button onClick={handleClickOpen}>{openButton}</Button>
+      <OpenButton />
       <Dialog
-        className={posClass + " " + className}
+        className={"dialogContainer " + posClass + " " + className}
         aria-labelledby={posClass}
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition(viewType)}
-        transitionDuration={300}
+        transitionDuration={500}
       >
-        <div className="dialogActions">
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
-          >
-            <CloseIcon />
-          </IconButton>
-          <Button autoFocus color="inherit" onClick={handleClose}>
-            save
-          </Button>
+        <div className="dialogContainer-header">
+          <IconButton className="close" onClick={handleClose}><CloseIcon /></IconButton>
         </div>
-        <div className="dialogContents">
+        <div className="dialogContainer-contents">
           {contents}
         </div>
+        <Actions />
       </Dialog>
     </div>
   );

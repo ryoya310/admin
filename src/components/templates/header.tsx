@@ -5,8 +5,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import SvgIcon from "@mui/material/SvgIcon";
+import Tooltip from "@mui/material/Tooltip";
 
+import SvgIcon from "@mui/material/SvgIcon";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
@@ -29,7 +30,6 @@ const Header = () => {
     console.log(123)
   };
 
-
   return (
     <Box
       className="header"
@@ -42,16 +42,82 @@ const Header = () => {
         className="header-right"
       >
         <Dialog
+          label="お知らせ"
           viewType="right"
           className="contactDialog"
+          readonly
           openButton={<SvgIcon component={NotificationsIcon} inheritViewBox />}
-          contents={<>aaaa</>}
+          contents={<>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          <p>aaa</p>
+          </>
+          }
         />
-        <Button
-          onClick={configClick}
-        >
-          <SvgIcon component={SettingsIcon} inheritViewBox />
-        </Button>
+        <Tooltip title="設定" arrow>
+          <Button
+            onClick={configClick}
+          >
+            <SvgIcon component={SettingsIcon} inheritViewBox />
+          </Button>
+        </Tooltip>
         <Menu
           id="demo-positioned-menu"
           aria-labelledby="demo-positioned-button"

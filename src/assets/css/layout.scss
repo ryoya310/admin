@@ -96,6 +96,11 @@ $sideSize: 40px;
 				color: #888;
 			}
 		}
+		.close {
+			.MuiTooltip-tooltip {
+				display: none;
+			}
+		}
 		svg {
 			width: $sideSize;
 			fill: #888;
@@ -119,13 +124,6 @@ $sideSize: 40px;
 	width: 100%;
 	padding: 1em;
 	overflow-y: scroll;
-}
-
-// お問い合わせダイアログ
-.contactDialog {
-	top: 40px!important;
-	left: calc(100% - 300px)!important;
-	width: 300px;
 }
 
 // ログイン
