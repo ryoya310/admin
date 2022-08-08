@@ -55,6 +55,13 @@ const Schedule = () => {
             />
           }
         />
+        <Dialog
+          label="Tooltip"
+          viewType="left"
+          readonly
+          openButton={<>左から保存なし</>}
+          contents={<Weekly dates={dates} setDates={setDates} />}
+        />
       </div>
     </Modules.RequireAuth>
   );
