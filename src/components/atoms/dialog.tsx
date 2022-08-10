@@ -7,7 +7,6 @@ import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
 
 import { TransitionProps } from "@mui/material/transitions";
-import { read } from "fs";
 
 type Props = {
   label?: any,

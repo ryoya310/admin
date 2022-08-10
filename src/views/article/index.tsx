@@ -1,10 +1,11 @@
 import * as Modules from "../../common/modules";
 import "./index.min.css";
 
-import { useState, useEffect } from "react"
+import * as React from "react";
+import { useState, useEffect, useMemo } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -12,7 +13,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Actions from "../../components/atoms/actions";
 import Dialog from "../../components/atoms/dialog";
 import InputText from "../../components/atoms/input_text";
+import Autocomplete from "../../components/atoms/autocomplete";
 
+/**
+ * リスト見出し設定
+ */
 const columns: GridColDef[] = [
   {
     field: "edit",
@@ -60,7 +65,7 @@ const columns: GridColDef[] = [
 
 const serializeForm = (target: string) => {
 
-  const form = document.querySelector(target) as any;
+  const form = document.querySelector(target) as HTMLFormElement;
   if (form === null) return "";
 
   const fd = new FormData(form);
@@ -81,6 +86,27 @@ const serializeArray = (datas: any) => {
   return query.slice(0, -1);
 }
 
+const Status = (): JSX.Element => {
+
+  // view
+  const [status, setStatus] = useState(false);
+  // リストの状態
+  const listStatus = Modules.useAppSelector(Modules.state.article.select);
+  let jsx = <></>;
+
+  console.log(status)
+  console.log(listStatus.status)
+
+  if (listStatus.status == "loading") {
+    jsx = <>
+      <div className="loading">
+        <CircularProgress />
+      </div>
+    </>
+  }
+  return jsx;
+}
+
 const Article = () => {
 
   const dispatch = Modules.useAppDispatch();
@@ -91,9 +117,11 @@ const Article = () => {
   // URLパラメータセット
   const [params] = useSearchParams();
   const datas = {
-    word: params.get("word"),
-    test: params.get("test")
+    SearchWord: params.get("SearchWord")
   }
+
+  // 再レンダリングさせない
+  useMemo(() => <Status />, []);
 
   // リスト表示
   const [lists, setDates] = useState([]);
@@ -106,12 +134,7 @@ const Article = () => {
       setDates(response.payload)
     }
     getList();
-
   }, []);
-
-  if (lists.length < 1) {
-    return <><CircularProgress /></>;
-  }
 
   // セルの更新
   const changeCell = (v: any) => {
@@ -132,12 +155,15 @@ const Article = () => {
     navigate(`/article${query}`);
   }
 
+  if (lists.length < 1) {
+    return <Status />
+  }
+
   return (
     <Modules.RequireAuth>
       <div
         className="Article views-wrapper"
       >
-        <h2>Article</h2>
 
         <form
           className="views-search"
@@ -147,19 +173,22 @@ const Article = () => {
           }}
         >
           <InputText
-            name="word"
-            value={datas.word}
-            isRequired={false}
+            name="SearchWord"
+            label="フリーワード"
+            value={datas.SearchWord}
             changed={changed}
           />
 
-          <InputText
-            name="test"
-            value={datas.test}
-            isRequired={false}
+          <Autocomplete
+            name="StatusID"
+            label="状態"
+            className="w120"
+            datas={statusArray}
             changed={changed}
           />
         </form>
+
+        <Status />
 
         <DataGrid
           className="views-list"
@@ -176,3 +205,8 @@ const Article = () => {
   );
 }
 export default Article
+
+const statusArray = [
+  { id: 1, value: "有効" },
+  { id: 9, value: "無効" },
+];

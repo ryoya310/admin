@@ -1,7 +1,7 @@
 import * as Modules from "./common/modules";
 
 import { Provider } from "react-redux";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 // Layout
 import Layout from "./components/templates/layout";

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocation } from "react-router-dom";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -6,7 +7,6 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import Tab from "@mui/material/Tab";
 import { Link } from "react-router-dom";
@@ -54,6 +54,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
   }),
 );
 
+
 const pages = [
   { label: "ダッシュボード", link: "/", icon: <HomeIcon /> },
   { label: "記事管理", link: "/article", icon: <ArticleIcon /> },
@@ -61,6 +62,8 @@ const pages = [
 ]
 
 export default function MiniDrawer() {
+
+  const location = useLocation();
 
   const [open, setOpen] = React.useState(false);
 
@@ -87,9 +90,9 @@ export default function MiniDrawer() {
           <List>
             {pages.map((page, i) => (
               <Tooltip key={i} title={page.label} placement="right" arrow  disableHoverListener={(open === false) ? false : true}>
-                <ListItem key={i}>
+                <ListItem key={i} className={(location.pathname == page.link) ? `-current` : ""}>
                   <Tab className="-icon" key={`icon${i}`} label={page.icon} component={Link} to={page.link} />
-                  <Tab className="-label" key={`label${i}`} label={page.label} component={Link} to={page.link} sx={{ opacity: open ? 1 : 0 }} />
+                  <Tab className="-label" key={`label${i}`} label={page.label} component={Link} to={page.link} wrapped={false} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItem>
               </Tooltip>
             ))}

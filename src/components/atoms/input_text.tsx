@@ -3,12 +3,13 @@ import TextField from "@mui/material/TextField";
 
 type Props = {
   name: string;
+  label?: string | null;
   value: any;
-  isRequired: boolean | null;
+  isRequired?: boolean | null;
   changed(name: string, value: string | null): void;
 }
 
-const InputText = ({ name, value, isRequired, changed }: Props) => {
+const InputText = ({ name, label, value, isRequired, changed }: Props) => {
 
   const src = {name, value};
   const [dst, setValue] = useState(src);
@@ -18,9 +19,11 @@ const InputText = ({ name, value, isRequired, changed }: Props) => {
     changed(name, e.target.value)
   };
 
+  label = (label) ? label : name;
+
   const attrs = {
     ...(name && { name: name }),
-    ...(name && { label: name }),
+    ...(label && { label: label }),
     ...(isRequired && { required: true }),
     value: dst.value,
   };
@@ -28,6 +31,7 @@ const InputText = ({ name, value, isRequired, changed }: Props) => {
   return <>
     <TextField
       {...attrs}
+      size="small"
       onChange={handleChange}
     />
   </>;

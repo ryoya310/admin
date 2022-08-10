@@ -46,5 +46,5 @@ export const articleSlice = createSlice({
 });
 
 export const { setFormData } = articleSlice.actions;
-export const views = (state: Modules.rootState) => state.member.views;
+export const select = (state: Modules.rootState) => state.article;
 export default articleSlice.reducer;

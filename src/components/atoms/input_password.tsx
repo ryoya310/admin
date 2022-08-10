@@ -9,6 +9,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 type Props = {
   name: string;
+  label?: string | null | undefined;
   isRequired: boolean | null;
   changed(name: string, value: string | null): void;
 }
@@ -18,7 +19,7 @@ interface State {
   password: string;
   showPassword: boolean;
 }
-const InputPassword = ({ name, isRequired, changed }: Props) => {
+const InputPassword = ({ name, label, isRequired, changed }: Props) => {
 
   const [thisValue, setValues] = useState<State>({
     value: "",
@@ -30,7 +31,6 @@ const InputPassword = ({ name, isRequired, changed }: Props) => {
   (prop: keyof State) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...thisValue, [prop]: e.target.value });
     changed(name, e.target.value)
-
   };
 
   const handleClickShowPassword = () => {
@@ -48,13 +48,16 @@ const InputPassword = ({ name, isRequired, changed }: Props) => {
     ...(isRequired && { required: true })
   };
 
+  label = (label) ? label : name;
+
   const inputAttrs = {
     ...(name && { name: name }),
-    ...(name && { label: name }),
+    ...(name && { label: label }),
   };
 
   return <>
     <FormControl
+      size="small"
       {...formAttrs}
       variant="outlined"
     >

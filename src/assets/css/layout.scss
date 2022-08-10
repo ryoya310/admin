@@ -71,7 +71,12 @@
 		.MuiDrawer-paper {
 			top: config.$headerHeight;
 			background: transparent;
+			border: none;
 		}
+		.MuiTouchRipple-root {
+			display: none;
+		}
+
 		.toggleBtn {
 			position: absolute;
 			top: 0;
@@ -87,7 +92,18 @@
 				padding: 0;
 				li {
 					padding: 0;
-					width: config.$sideSize;
+					width: 100%;
+					height: 36px;
+					overflow: hidden;
+					white-space: nowrap;
+					&.-current {
+						width: 100%;
+						background: #fff;
+						a {
+							background: #fff;
+							white-space: nowrap;
+						}
+					}
 				}
 			}
 			.-icon {
@@ -97,6 +113,7 @@
 			.-label {
 				padding-left: 0;
 				align-items: flex-start;
+				width: 100%;
 				color: #888;
 			}
 		}
@@ -125,9 +142,19 @@
 
 // 中ページ共通
 .views-wrapper {
+	position: relative;
 	width: 100%;
 	padding: 1em;
 	overflow-y: scroll;
+}
+
+// 検索
+.views-search {
+	display: flex;
+	margin-bottom: 1em;
+	> div {
+		margin-right: 1em;
+	}
 }
 
 // ログイン

@@ -7,7 +7,7 @@ body {
 	margin: 0;
 	line-height: 1.5;
 	text-size-adjust: 100%;
-	background: linear-gradient(-45deg, #23A6D5, #23B6C7, #23C5B9, #23D5AB);
+	// background: linear-gradient(-45deg, #23A6D5, #23B6C7, #23C5B9, #23D5AB);
 	background-size: 400% 400%;
 	animation: gradient 3s ease infinite;
 	width: 100%;
@@ -17,6 +17,20 @@ body {
 
 svg {
 	fill: #888;
+}
+
+.w120 {
+	width: 120px;
+}
+
+.loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: auto;
+	text-align: center;
+	overflow: hidden;
 }
 
 .weekly {
