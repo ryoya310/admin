@@ -17,7 +17,6 @@ const state = {
 
 // localStorageにmemberがあれば簡易認証
 const isAuth = () => {
-  console.log(localStorage.getItem("member"))
   return localStorage.getItem("member") == "true" ? true : false;
 }
 

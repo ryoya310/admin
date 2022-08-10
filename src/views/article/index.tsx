@@ -1,160 +1,175 @@
 import * as Modules from "../../common/modules";
 import "./index.min.css";
-import List from "./list";
 
-import Box from "@mui/material/Box";
+import { useState, useEffect } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-// import DeleteButton from "../../components/atoms/deleteRow";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import Actions from "../../components/atoms/actions";
+import Dialog from "../../components/atoms/dialog";
+import InputText from "../../components/atoms/input_text";
 
 const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 90 },
   {
-    field: "deleteBtn",
+    field: "edit",
     headerName: "編集",
     sortable: false,
-    width: 90,
-    renderCell: (params) => <button>編集</button>
+    width: 50,
+    renderCell: (params) => <>
+      <Dialog
+        openButton={<><EditIcon /></>}
+        contents={<>{params.id}</>}
+      />
+    </>
   },
   {
-    field: "firstName",
-    headerName: "First name",
-    width: 150,
-    editable: true,
+    field: "id",
+    headerName: "記事ID",
+    width: 100
   },
   {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: true,
+    field: "Caption",
+    headerName: "記事タイトル",
+    width: 200,
+    editable: false,
   },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 110,
-    editable: true,
+    field: "Priority",
+    headerName: "表示順",
+    width: 100,
+    align: "right",
+    editable: true
   },
   {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
+    field: "delete",
+    headerName: "削除",
     sortable: false,
-    width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+    width: 50,
+    renderCell: (params) => <>
+      <Dialog
+        openButton={<><DeleteIcon /></>}
+        contents={<>{params.id}</>}
+      />
+    </>
   },
 ];
 
-const datas = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+const serializeForm = (target: string) => {
+
+  const form = document.querySelector(target) as any;
+  if (form === null) return "";
+
+  const fd = new FormData(form);
+  let query = "?";
+  for (const arr of fd.entries()) {
+    query += `${arr[0]}=${arr[1]}&`;
+  }
+  return query.slice(0, -1);
+}
+
+const serializeArray = (datas: any) => {
+
+  let query = "?";
+  Object.keys(datas).forEach(function (key) {
+    query += `${key}=${datas[key]}&`;
+  });
+
+  return query.slice(0, -1);
+}
 
 const Article = () => {
 
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  // const list = Modules.useAppSelector(Modules.state.article.list);
-
   const dispatch = Modules.useAppDispatch();
+
+  // URL書換
+  const navigate = useNavigate();
+
+  // URLパラメータセット
+  const [params] = useSearchParams();
+  const datas = {
+    word: params.get("word"),
+    test: params.get("test")
+  }
+
+  // リスト表示
+  const [lists, setDates] = useState([]);
+
   useEffect(() => {
 
-    axios.post(
-      `${Modules.constant.apiRoot}app/list.json`
-    ).then(function (response) {
-      dispatch(Modules.state.article.getListData(response.data))
+    const query = serializeArray(datas);
+    const getList = async () => {
+      const response = await dispatch(Modules.state.article.getList(query))
+      setDates(response.payload)
+    }
+    getList();
 
-    });
-    return;
   }, []);
 
-  const [rows, setRows] = useState(datas);
-
-  // データの確認
-  const checkRows = () => console.log(rows);
-  checkRows();
+  if (lists.length < 1) {
+    return <><CircularProgress /></>;
+  }
 
   // セルの更新
   const changeCell = (v: any) => {
-    console.log(v.value)
+    console.log(v)
   }
 
-  // https://qiita.com/takiguchi-yu/items/4d6e2845402aa2d5f36a
-  // https://tech-it.r-net.info/program/react/323/#toc-1
+  const changed = async (name: string, value: string | null) => {
+
+    // 状態管理
+    dispatch(Modules.state.article.setFormData({name, value}))
+
+    const query = serializeForm(".views-search");
+    // リスト取得
+    const response = await dispatch(Modules.state.article.getList(query))
+    setDates(response.payload)
+
+    // URL書換
+    navigate(`/article${query}`);
+  }
+
   return (
     <Modules.RequireAuth>
       <div
         className="Article views-wrapper"
       >
-        <h1>Article</h1>
-        {/* <ul>
-          <List />
-        </ul> */}
-        <div>
-          <Button variant="outlined" onClick={handleClickOpen}>
-            Open form dialog
-          </Button>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Subscribe</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                To subscribe to this website, please enter your email address here. We
-                will send updates occasionally.
-              </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Email Address"
-                type="email"
-                fullWidth
-                variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handleClose}>Subscribe</Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-        <Box sx={{ height: "600px", width: "100%", background: "#fff" }}>
-          <DataGrid
-            rows={datas}
-            columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-            checkboxSelection
-            disableSelectionOnClick
-            onCellEditCommit={changeCell}
+        <h2>Article</h2>
+
+        <form
+          className="views-search"
+          onSubmit={ async (e) => {
+            e.preventDefault();
+            console.log(e.currentTarget)
+          }}
+        >
+          <InputText
+            name="word"
+            value={datas.word}
+            isRequired={false}
+            changed={changed}
           />
-        </Box>
+
+          <InputText
+            name="test"
+            value={datas.test}
+            isRequired={false}
+            changed={changed}
+          />
+        </form>
+
+        <DataGrid
+          className="views-list"
+          rows={lists}
+          columns={columns}
+          rowsPerPageOptions={[50, 100, 200, 500]}
+          // checkboxSelection
+          // disableSelectionOnClick
+          onCellEditCommit={changeCell}
+        />
         <Actions />
       </div>
     </Modules.RequireAuth>

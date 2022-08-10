@@ -1,10 +1,5 @@
 @use "config.scss";
 
-$headerHeight: 40px;
-$mainHeight: calc(100vh - 40px - 32px);
-$footerHeight: 32px;
-$sideSize: 40px;
-
 .wrapper {
 
 	background: #fff;
@@ -19,8 +14,8 @@ $sideSize: 40px;
 		z-index: 1;
 		white-space: nowrap;
 		padding: 0;
-		height: $headerHeight;
-		line-height: $headerHeight;
+		height: config.$headerHeight;
+		line-height: config.$headerHeight;
 		background: config.$blend1_01;
 		color: #fff;
 		display: flex;
@@ -49,6 +44,10 @@ $sideSize: 40px;
 		&-right {
 			display: flex;
 			align-items: center;
+			> div, button {
+				height: 100%;
+				width: 50px;
+			}
 			button {
 				min-width: initial;
 				color: #fff;
@@ -60,40 +59,40 @@ $sideSize: 40px;
 		position: relative;
 		display: flex;
 		flex-grow: 1;
-		height: $mainHeight;
+		height: config.$mainHeight;
 		width: 100%;
 	}
 
 	.side {
 
-		height: calc($mainHeight + $footerHeight);
+		height: calc(config.$mainHeight + config.$footerHeight);
 		background: #eee;
 
 		.MuiDrawer-paper {
-			top: $headerHeight;
+			top: config.$headerHeight;
 			background: transparent;
 		}
 		.toggleBtn {
 			position: absolute;
 			top: 0;
 			right: 0;
-			width: $sideSize;
-			height: $sideSize;
+			width: config.$sideSize;
+			height: config.$sideSize;
 		}
 		.toggleMenu {
 			position: absolute;
-			top: $sideSize;
+			top: config.$sideSize;
 			width: 100%;
 			ul {
 				padding: 0;
 				li {
 					padding: 0;
-					width: $sideSize;
+					width: config.$sideSize;
 				}
 			}
 			.-icon {
 				display: contents;
-				width: $sideSize;
+				width: config.$sideSize;
 			}
 			.-label {
 				padding-left: 0;
@@ -107,15 +106,15 @@ $sideSize: 40px;
 			}
 		}
 		svg {
-			width: $sideSize;
+			width: config.$sideSize;
 			fill: #888;
 		}
 	}
 
 	.footer {
-		padding: 0 1em 0 $sideSize;
-		height: $footerHeight;
-		line-height: $footerHeight;
+		padding: 0 1em 0 config.$sideSize;
+		height: config.$footerHeight;
+		line-height: config.$footerHeight;
 		background: #eee;
 		text-align: right;
 		p {

@@ -1,6 +1,7 @@
 import * as Modules from "../../common/modules";
 import "./index.min.css";
-import { useState, useEffect, useContext } from "react";
+
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import Weekly from "../../components/atoms/weekly";

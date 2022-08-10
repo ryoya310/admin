@@ -1,5 +1,27 @@
 .Article {
-    h1 {
+    h2 {
         color: red;
+        margin: 0;
+    }
+    .views-list {
+        max-height: 600px;
+
+        .MuiDataGrid-columnHeaders {
+            background: #5e5e5e;
+            color: #fff;
+        }
+
+        .MuiDataGrid-row {
+            &:nth-child(2n) {
+                background: #eeeeee50;
+            }
+        }
+        .MuiDataGrid-cell {
+            button {
+                min-width: initial;
+                padding: 0;
+                color: rgb(106, 177, 235);
+            }
+        }
     }
 }

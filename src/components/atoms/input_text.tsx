@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 
 type Props = {
   name: string;
-  value: string;
+  value: any;
   isRequired: boolean | null;
   changed(name: string, value: string | null): void;
 }

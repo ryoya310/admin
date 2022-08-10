@@ -6,6 +6,12 @@ $maxWidth: 1920px;
 // フォントカラー
 $fontColor: #111;
 
+// レイアウト
+$headerHeight: 50px;
+$mainHeight: calc(100vh - 50px - 32px);
+$footerHeight: 32px;
+$sideSize: 40px;
+
 // テーブル
 // https://meyerweb.com/eric/tools/color-blend/#008833:FFFFFF:4:hex
 $blend1_01: #111;

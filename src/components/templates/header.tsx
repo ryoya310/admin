@@ -7,6 +7,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 
+import Badge from "@mui/material/Badge";
+
 import SvgIcon from "@mui/material/SvgIcon";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -46,14 +48,16 @@ const Header = () => {
           viewType="right"
           className="contactDialog"
           readonly
-          openButton={<SvgIcon component={NotificationsIcon} inheritViewBox />}
+          openButton={
+            <Badge badgeContent={17} color="error">
+              <NotificationsIcon />
+            </Badge>
+          }
           contents={<>list</>}
         />
         <Tooltip title="設定" arrow>
-          <Button
-            onClick={configClick}
-          >
-            <SvgIcon component={SettingsIcon} inheritViewBox />
+          <Button onClick={configClick}>
+            <SvgIcon component={SettingsIcon} />
           </Button>
         </Tooltip>
         <Menu

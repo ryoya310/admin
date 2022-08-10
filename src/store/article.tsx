@@ -1,32 +1,50 @@
 import * as Modules from "../common/modules";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const name = "article";
 
 export interface ArticleState {
-  form: any;
-  list: any;
+  views: any;
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: ArticleState = {
-  form: {},
-  list: "",
+  views: {},
   status: "idle",
 };
 
+export const getList = createAsyncThunk(
+  name,
+  async (query: any) => {
+    const response = await axios.get(`${Modules.constant.apiRoot}app/article.php${query}`);
+    return response.data;
+  }
+);
+
 export const articleSlice = createSlice({
-  name: "article",
+  name: name,
   initialState,
   reducers: {
-    getFormData: (state, arr) => {
-      state.form[arr.payload.name] = arr.payload.value;
-    },
-    getListData: (state, arr) => {
-      state.list = arr;
+    setFormData: (state, arr) => {
+      state.views = arr.payload;
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getList.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getList.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.views = action.payload;
+      })
+      .addCase(getList.rejected, (state) => {
+        state.status = "failed";
+      });
   },
 });
 
-export const { getFormData, getListData } = articleSlice.actions;
-export const form = (state: Modules.rootState) => state.article.form;
-export const list = (state: Modules.rootState) => state.article.list;
+export const { setFormData } = articleSlice.actions;
+export const views = (state: Modules.rootState) => state.member.views;
 export default articleSlice.reducer;
