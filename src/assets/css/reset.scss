@@ -1,0 +1,145 @@
+
+@use "config.scss";
+
+body {
+	margin: 0;
+	line-height: 1.5;
+	text-size-adjust: 100%;
+	font-family: "ヒラギノ角ゴ Pro W3",メイリオ,Osaka,Arial,Verdana ,"ＭＳ Ｐゴシック",sans-serif;
+	// background: linear-gradient(-45deg, #23A6D5, #23B6C7, #23C5B9, #23D5AB);
+	background-size: 400% 400%;
+	animation: gradient 3s ease infinite;
+	width: 100%;
+	height: 100vh;
+	color: config.$fontColor;
+	* {
+		&::-webkit-scrollbar {
+			height: 8px;
+			width: 8px;
+		}
+		&::-webkit-scrollbar-track {
+			box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #e6e6e6;
+			box-shadow:0 0 0 1px rgba(255, 255, 255, .6);
+		}
+	}
+}
+
+// SVG
+svg {
+	fill: #888;
+}
+
+// テーブル
+table {
+
+	user-select: none;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	button {
+		min-width: initial!important;
+		padding: 0!important;
+	}
+	thead {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		th {
+			position: relative;
+			&.sortable {
+				cursor: pointer;
+				&::after {
+					position: absolute;
+					top: 5px;
+					right: 5px;
+					font-size: .8em;
+				}
+			}
+			&.sortable[sort="asc"]:after {
+				content: "▲";
+			}
+			&.sortable[sort="desc"]:after {
+				content: "▼";
+			}
+		}
+	}
+	tr {
+		th, td{
+			height: 32px;
+			line-height: 32px;
+			padding: 0.2em;
+			white-space: nowrap;
+			overflow: hidden;
+			vertical-align: middle;
+			svg {
+				width: 20px;
+				height: 20px;
+			}
+		}
+		th {
+			background: config.$blend1_02;
+			text-align: left;
+			font-weight: initial;
+			color: #fff;
+			.dummy{
+				width: auto;
+			}
+			a, button {
+				color: #fff!important;
+				border: 1px solid #fff!important;
+			}
+		}
+		td {
+			vertical-align: middle;
+			background: #f0f0f0;
+			&:hover {
+				background: config.$blend1_03!important;
+			}
+			div.image {
+				position: relative;
+				text-align: center;
+				background: #fff;
+				border-radius: 50%;
+				width: 30px;
+				height: 30px;
+				overflow: hidden;
+				box-shadow: 1px 1px 3px #eee;
+				img {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					max-width: 90%;
+					max-height: 90%;
+					width: auto;
+					height: auto;
+				}
+			}
+		}
+		&:nth-child(2n) td{
+			background:#ffffff;
+		}
+		&:last-child{
+			td {
+				border-bottom:#e8f4ec 1px solid;
+			}
+		}
+		&:hover td{
+			background: config.$blend1_04!important;
+		}
+		&.updated{
+			td {
+				&:hover tr{
+				}
+			}
+		}
+	}
+}
+
+ul {
+	list-style: none;
+	padding-left: 0;
+}

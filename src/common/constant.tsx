@@ -1,9 +1,9 @@
-import { useState, useEffect, createContext, useContext } from "react"
+import { useState, useEffect, createContext } from "react"
 import axios from "axios";
 
 const apiRoot = "http://192.168.10.41/";
 // const apiRoot = "http://23.10.123.227/";
-// const apiRoot = "http://ryoya.firstinc.jp/";
+// const apiRoot = "https://ryoya.firstinc.jp/";
 
 // フロント用Constants
 const constant = {

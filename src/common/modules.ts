@@ -20,6 +20,29 @@ const isAuth = () => {
   return localStorage.getItem("member") == "true" ? true : false;
 }
 
+const serializeForm = (target: string) => {
+
+  const form = document.querySelector(target) as HTMLFormElement;
+  if (form === null) return "";
+
+  const fd = new FormData(form);
+  let query = "?";
+  for (const arr of fd.entries()) {
+    query += `${arr[0]}=${arr[1]}&`;
+  }
+  return query.slice(0, -1);
+}
+
+const serializeArray = (datas: any) => {
+
+  let query = "?";
+  Object.keys(datas).forEach(function (key) {
+    query += `${key}=${datas[key]}&`;
+  });
+
+  return query.slice(0, -1);
+}
+
 export {
   constant,
   Constants,
@@ -27,6 +50,8 @@ export {
   store,
   state,
   isAuth,
+  serializeForm,
+  serializeArray,
   useAppDispatch,
   useAppSelector,
   RequireAuth,

@@ -6,7 +6,7 @@ type Props = {
   label?: string | null;
   value: any;
   isRequired?: boolean | null;
-  changed(name: string, value: string | null): void;
+  changed?(name: string, value: string | null): void;
 }
 
 const InputText = ({ name, label, value, isRequired, changed }: Props) => {
@@ -16,7 +16,9 @@ const InputText = ({ name, label, value, isRequired, changed }: Props) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({...dst, name:name, value:e.target.value})
-    changed(name, e.target.value)
+    if (changed) {
+      changed(name, e.target.value)
+    }
   };
 
   label = (label) ? label : name;

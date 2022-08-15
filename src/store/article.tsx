@@ -17,8 +17,14 @@ const initialState: ArticleState = {
 export const getList = createAsyncThunk(
   name,
   async (query: any) => {
-    const response = await axios.get(`${Modules.constant.apiRoot}app/article.php${query}`);
+    const response = await axios.get(`${Modules.constant.apiRoot}api/Article/list.php${query}`);
     return response.data;
+  }
+);
+
+export const deleteRow = createAsyncThunk(
+  name,
+  async (params: any) => {
   }
 );
 
@@ -41,7 +47,9 @@ export const articleSlice = createSlice({
       })
       .addCase(getList.rejected, (state) => {
         state.status = "failed";
-      });
+      })
+      // .addCase(deleteRow.rejected, (state) => {
+      // })
   },
 });
 

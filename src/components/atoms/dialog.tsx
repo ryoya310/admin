@@ -9,12 +9,14 @@ import Tooltip from "@mui/material/Tooltip";
 import { TransitionProps } from "@mui/material/transitions";
 
 type Props = {
-  label?: any,
-  viewType?: any,
-  className?: any,
-  readonly?: boolean,
+  label?: any
+  viewType?: any
+  className?: any
+  readonly?: boolean
   openButton: JSX.Element
   contents: JSX.Element
+  result?: boolean
+  submit?(e: React.MouseEvent, set: any): void
 }
 
 const Transition_up = React.forwardRef(function Transition(
@@ -54,7 +56,7 @@ const Transition = (viewType: string | null) => {
   }
 }
 
-const OpenDialog = ({ label, viewType, className, readonly, openButton, contents }: Props) => {
+const OpenDialog = ({ label, viewType, className, readonly, openButton, contents, result, submit }: Props) => {
 
   const [open, setOpen] = React.useState(false);
 
@@ -65,6 +67,13 @@ const OpenDialog = ({ label, viewType, className, readonly, openButton, contents
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleSubmit = (e: React.MouseEvent) => {
+
+    if (submit) {
+      submit(e, setOpen)
+    }
+  }
 
   const posClass = viewType + "PositionDialog";
 
@@ -87,7 +96,7 @@ const OpenDialog = ({ label, viewType, className, readonly, openButton, contents
     } else {
       return <>
         <div className="dialogContainer-actions">
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={handleSubmit}>
             保存
           </Button>
           <Button autoFocus onClick={handleClose}>
@@ -107,7 +116,7 @@ const OpenDialog = ({ label, viewType, className, readonly, openButton, contents
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition(viewType)}
-        transitionDuration={500}
+        transitionDuration={300}
       >
         <div className="dialogContainer-header">
           <IconButton className="close" onClick={handleClose}><CloseIcon /></IconButton>
