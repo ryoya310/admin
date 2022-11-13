@@ -1,9 +1,7 @@
 import { useState, useEffect, createContext } from "react"
 import axios from "axios";
 
-const apiRoot = "http://192.168.10.41/";
-// const apiRoot = "http://23.10.123.227/";
-// const apiRoot = "https://ryoya.firstinc.jp/";
+const apiRoot = "http://127.0.0.1/";
 
 // フロント用Constants
 const constant = {
